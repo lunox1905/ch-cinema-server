@@ -6,4 +6,5 @@ router.get('/getmovie', HomeController.getMovies)
 router.get('/getmovie/:slug', HomeController.getMovie)
 router.post('/addmovie', HomeController.addMovie)
 router.post('/editmovie/:id', HomeController.editMovie)
+router.post('/deletemovie', HomeController.deleteMovie)
 module.exports = router

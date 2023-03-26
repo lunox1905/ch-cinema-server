@@ -19,8 +19,8 @@ const movie = new Schema({
     view: {type: Number, default: 0},
     premiereDate: {type: Date},
     rating: {
-        amount: {type: Number},
-        score: {type: Number}
+        amount: {type: Number, default: 0},
+        score: {type: Number, default: 0}
     },
     category: [{type: mongoose.Types.ObjectId, ref: 'categorys'}],
     showTime: [{type: mongoose.Types.ObjectId, ref: 'cinema'}],
