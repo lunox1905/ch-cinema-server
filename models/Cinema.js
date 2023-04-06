@@ -5,12 +5,11 @@ const slug = require('mongoose-slug-generator')
 mongoose.plugin(slug)
 
 const cinema = new Schema({
-    name: {type: String},
+    username: {type: String},
     slug: {type: String, slug: 'name'},
     address: {type: String},
     phoneNumber: {type: Number},
-    description: {type: String},
-    showTime: [{type: mongoose.Types.ObjectId, ref: 'showtimes'}],
+    description: {type: String}
 }, {
     timestamps: true,
 })

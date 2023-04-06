@@ -23,7 +23,6 @@ const movie = new Schema({
         score: {type: Number, default: 0}
     },
     category: [{type: mongoose.Types.ObjectId, ref: 'categorys'}],
-    showTime: [{type: mongoose.Types.ObjectId, ref: 'cinema'}],
 }, {
     timestamps: true,
 })

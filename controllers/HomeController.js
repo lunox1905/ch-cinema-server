@@ -14,13 +14,9 @@ class HomeController {
 
     async addMenu (req, res) {
         try {
-      
             const menu = new Menu(req.body)
             await menu.save()
-            
-    
             res.json({success: true, menu: menu})
-            
         } catch(e) {
             console.log(e)
             res.json({success: false})
@@ -29,12 +25,17 @@ class HomeController {
 
     async editMenu (req, res) {
         try {
-      
-         
             await Menu.updateOne({_id: req.params.id}, req.body)
-  
             res.json({success: true})
-            
+        } catch(e) {
+            res.json({success: false})
+        }
+    }
+
+    async deleteMenu (req, res) {
+        try {
+            await Menu.deleteOne({_id: req.body.id})
+            res.json({success: true, id: req.body.id})
         } catch(e) {
             res.json({success: false})
         }
@@ -67,12 +68,16 @@ class HomeController {
 
     async editCategory (req, res) {
         try {
-      
-         
             await Category.updateOne({_id: req.params.id}, req.body)
-  
-            res.json({success: true})
-            
+        } catch(e) {
+            res.json({success: false})
+        }
+    }
+
+    async deleteCategory (req, res) {
+        try {
+            await Category.deleteOne({_id: req.body.id})
+            res.json({success: true, id: req.body.id})
         } catch(e) {
             res.json({success: false})
         }
@@ -106,11 +111,19 @@ class HomeController {
 
     async editBanner (req, res) {
         try {
-      
-         
             await Banner.updateOne({_id: req.params.id}, req.body)
   
             res.json({success: true})
+            
+        } catch(e) {
+            res.json({success: false})
+        }
+    }
+
+    async deleteBanner (req, res) {
+        try {
+            await Banner.deleteOne({_id: req.body.id})
+            res.json({success: true, id: req.body.id})
             
         } catch(e) {
             res.json({success: false})
