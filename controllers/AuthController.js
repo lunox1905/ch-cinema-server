@@ -58,6 +58,28 @@ class AuthController {
             res.status(500).json({success: false, message: 'Error in server'})
         }
     }
+
+    async getUsers(req, res){
+        try{
+            const users = await Users.find({})
+            if(users) {
+                res.json({success: true, users})
+            }
+            else res.status(500).json({success: false, message: 'Error in server'})
+        } catch(err){
+            res.status(500).json({success: false, message: 'Error in server'})
+        }
+    }
+
+    updateRole(req, res){
+        Users.findByIdAndUpdate({_id: req.params.id}, {role: req.body.role})
+        .then(() => {
+            res.json({success: true})
+        })
+        .catch((e) => {
+            res.json({success: false, message: 'Error in server'})
+        })
+    }
 }
 
 module.exports = new AuthController();

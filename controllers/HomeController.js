@@ -1,6 +1,7 @@
 const Menu = require('../models/Navigation')
 const Category = require('../models/Category')
 const Banner = require('../models/Banner')
+const Users = require('../models/User')
 class HomeController {
 
     async getMenu (req, res) {
@@ -126,6 +127,15 @@ class HomeController {
             res.json({success: true, id: req.body.id})
             
         } catch(e) {
+            res.json({success: false})
+        }
+    }
+
+    async getAmountUser (req, res) {
+        try {
+            const countUser = await Users.countDocuments()
+            res.json({success: true, countUser})
+        } catch (error) {
             res.json({success: false})
         }
     }

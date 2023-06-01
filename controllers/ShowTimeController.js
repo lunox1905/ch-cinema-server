@@ -4,6 +4,14 @@ class ShowTimeController {
     async getShowTimeAll (req, res) {
         try {
             const showTime = await ShowTime.find({})
+                .populate({
+                    path: 'movie',
+                    select: 'title _id'
+                  })
+                .populate({
+                    path: 'cinema',
+                    select: 'name _id'
+                  }).exec() 
             res.json({success: true, showTime})
         } catch {
             res.json({success: false})
@@ -21,7 +29,16 @@ class ShowTimeController {
 
     async getShowTimeByMovie (req, res) {
         try {
-            const showTime = await ShowTime.findOne({movie: req.params.id}) 
+            
+            const showTime = await ShowTime.find({movie: req.params.id}) 
+            .populate({
+                path: 'movie',
+                select: 'title _id'
+              })
+            .populate({
+                path: 'cinema',
+                select: 'name _id'
+              }).exec() 
             res.json({success: true, showTime})
         } catch {
             res.json({success: false})
@@ -30,7 +47,15 @@ class ShowTimeController {
 
     async getShowTimeByCinema (req, res) {
         try {
-            const showTime = await ShowTime.findOne({cinema: req.params.id}) 
+            const showTime = await ShowTime.find({cinema: req.params.id}) 
+            .populate({
+                path: 'movie',
+                select: 'title _id'
+              })
+            .populate({
+                path: 'cinema',
+                select: 'name _id'
+              }).exec() 
             res.json({success: true, showTime})
         } catch {
             res.json({success: false})
@@ -39,10 +64,11 @@ class ShowTimeController {
 
     async addShowTime (req, res) {
         try {
-      
+            req.body.date += '/' + req.body.time
+            req.body.date = new Date(req.body.date)
             const showTime = new ShowTime(req.body)
             await showTime.save()
-       
+            
             res.json({success: true, showTime})
             
         } catch(e) {
@@ -64,7 +90,6 @@ class ShowTimeController {
 
     async deleteShowTime (req, res) {
         try {
-        
             await ShowTime.deleteOne({_id: req.body.id})
            
             res.json({success: true})

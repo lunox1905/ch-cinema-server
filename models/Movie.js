@@ -22,6 +22,7 @@ const movie = new Schema({
         amount: {type: Number, default: 0},
         score: {type: Number, default: 0}
     },
+    state: {type: Boolean},
     category: [{type: mongoose.Types.ObjectId, ref: 'categorys'}],
 }, {
     timestamps: true,
